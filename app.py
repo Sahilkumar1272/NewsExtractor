@@ -35,10 +35,11 @@ github = oauth.register(
 # Connect to the PostgreSQL database
 def connect_db():
     conn = psycopg2.connect(
-        dbname="dhp2024",
-        user="postgres",
-        password="Sahil9211@#",
-        host="localhost"
+        dbname="dhp2024_j8ox",
+        Port=5432,
+        user="sahilkumar",
+        password="issiL6uYFyZzhA6czc9lDanxS32H8OOO",
+        host="dpg-cnlivimv3ddc73f8a3u0-a"
     )
     return conn
 
