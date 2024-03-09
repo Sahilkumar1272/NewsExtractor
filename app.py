@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash # Import necessary Flask modules
 import psycopg2  # Import PostgreSQL adapter
 from bs4 import BeautifulSoup  # Import BeautifulSoup for web scraping
@@ -35,11 +36,7 @@ github = oauth.register(
 # Connect to the PostgreSQL database
 def connect_db():
     conn = psycopg2.connect(
-        dbname="dhp2024_j8ox",
-        Port=5432,
-        user="sahilkumar",
-        password="issiL6uYFyZzhA6czc9lDanxS32H8OOO",
-        host="dpg-cnlivimv3ddc73f8a3u0-a"
+        dbname=os.environ['postgres://sahilkumar:issiL6uYFyZzhA6czc9lDanxS32H8OOO@dpg-cnlivimv3ddc73f8a3u0-a:5432/dhp2024_j8ox'],
     )
     return conn
 
