@@ -35,7 +35,7 @@ github = oauth.register(
 )
 
 # Connect to the PostgreSQL database
-DATABASE_URL=postgres://sahilkumar:issiL6uYFyZzhA6czc9lDanxS32H8OOO@dpg-cnlivimv3ddc73f8a3u0-a/dhp2024_j8ox
+DATABASE_URL='postgres://sahilkumar:issiL6uYFyZzhA6czc9lDanxS32H8OOO@dpg-cnlivimv3ddc73f8a3u0-a/dhp2024_j8ox'
 
 conn = psycopg2.connect(dbname=os.environ['DATABASE_URL'])
 
