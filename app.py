@@ -35,11 +35,11 @@ github = oauth.register(
 )
 
 # Connect to the PostgreSQL database
-def connect_db():
-    conn = psycopg2.connect(
-        dbname=os.environ['postgres://sahilkumar:issiL6uYFyZzhA6czc9lDanxS32H8OOO@dpg-cnlivimv3ddc73f8a3u0-a:5432/dhp2024_j8ox'],
-    )
-    return conn
+DATABASE_URL=postgres://sahilkumar:issiL6uYFyZzhA6czc9lDanxS32H8OOO@dpg-cnlivimv3ddc73f8a3u0-a/dhp2024_j8ox
+
+conn = psycopg2.connect(dbname=os.environ['DATABASE_URL'])
+
+
 
 def get_sentiment(text):
     analysis = TextBlob(text)
@@ -131,7 +131,7 @@ def submit():
     summary = {'words_count': words_count, 'sentences_count': sent_count, 'UPOS_tag_count': sum(dict_upos.values())}
 
     # Connect to the database
-    conn = connect_db()
+
     cur = conn.cursor()
 
     # Create a table if it doesn't exist
@@ -170,7 +170,7 @@ def admin():
 def login():
     email = request.form.get('email')  # Get email from the submitted form
     password = request.form.get('password')  # Get password from the submitted form
-    conn = connect_db()
+   
     cur = conn.cursor()
 
     # Execute SQL query to check credentials
@@ -192,7 +192,7 @@ def admin_logout():
 
 @app.route('/admin/welcome')
 def admin_welcome():
-    conn = connect_db() 
+   
     cur = conn.cursor()
     cur.execute("SELECT * FROM news_articles")
     articles = cur.fetchall()
@@ -216,13 +216,12 @@ def github_authorize():
     session['github_token'] = token
     resp = github.get('user').json()
     print(f"\n{resp}\n")
-    con=connect_db()
     
     
         
     logged_in_username = resp.get('login')
     if logged_in_username in github_admin_usernames:
-        cursor = con.cursor()
+        cursor = conn.cursor()
         cursor.execute("SELECT * FROM news_articles")
         data = cursor.fetchall()
         return render_template("admin_welcome.html",articles=data)
