@@ -140,12 +140,12 @@ def submit():
     summary = {'words_count': words_count, 'sentences_count': sent_count, 'UPOS_tag_count': sum(dict_upos.values())}
 
     # Connect to the database
-
+    conn = psycopg2.connect(**db_config)
     cur = conn.cursor()
 
     # Create a table if it doesn't exist
     cur.execute("""
-        CREATE TABLE IF NOT EXISTS news_articles (
+        CREATE TABLE IF NOT EXISTS news_articles(
             id SERIAL PRIMARY KEY,
             url VARCHAR(1000),
             text TEXT,
@@ -157,8 +157,8 @@ def submit():
 
     # Insert data into the database
     cur.execute("""
-        INSERT INTO news_articles (url, text, word_count, sentence_count, pos_tag_count)
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO news_articles(url, text, word_count, sentence_count, pos_tag_count)
+        VALUES(%s, %s, %s, %s, %s)
     """, (url, text, words_count, sent_count, pos_tag_count))
 
     conn.commit()  # Commit changes
@@ -179,7 +179,7 @@ def admin():
 def login():
     email = request.form.get('email')  # Get email from the submitted form
     password = request.form.get('password')  # Get password from the submitted form
-   
+    conn = psycopg2.connect(**db_config)
     cur = conn.cursor()
 
     # Execute SQL query to check credentials
@@ -201,7 +201,7 @@ def admin_logout():
 
 @app.route('/admin/welcome')
 def admin_welcome():
-   
+    conn = psycopg2.connect(**db_config)
     cur = conn.cursor()
     cur.execute("SELECT * FROM news_articles")
     articles = cur.fetchall()
@@ -230,6 +230,7 @@ def github_authorize():
         
     logged_in_username = resp.get('login')
     if logged_in_username in github_admin_usernames:
+        conn = psycopg2.connect(**db_config)
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM news_articles")
         data = cursor.fetchall()
