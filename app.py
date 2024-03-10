@@ -162,7 +162,7 @@ def submit():
     """, (url, text, words_count, sent_count, pos_tag_count))
 
     conn.commit()  # Commit changes
-    conn.close()  # Close database connection
+    # conn.close()  # Close database connection
 
     # Render the content.html template with the extracted data
     return render_template('content.html', heading=heading, sub_heading=sub_heading, text=text,
