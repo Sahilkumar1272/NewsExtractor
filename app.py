@@ -35,9 +35,18 @@ github = oauth.register(
 )
 
 # Connect to the PostgreSQL database
-# DATABASE_URL='postgres://sahilkumar:issiL6uYFyZzhA6czc9lDanxS32H8OOO@dpg-cnlivimv3ddc73f8a3u0-a/dhp2024_j8ox'
 
-# conn = psycopg2.connect(dbname=os.environ[DATABASE_URL])
+db_config = {
+    'dbname': 'dhp2024_j8ox',
+    'user': 'sahilkumar',
+    'password': 'issiL6uYFyZzhA6czc9lDanxS32H8OOO',
+    'host': 'dpg-cnlivimv3ddc73f8a3u0-a',
+    'port': '5432'
+}
+
+
+conn = psycopg2.connect(**db_config)
+cur = conn.cursor()
 
 
 
@@ -132,28 +141,28 @@ def submit():
 
     # Connect to the database
 
-    # cur = conn.cursor()
+    cur = conn.cursor()
 
     # Create a table if it doesn't exist
-    # cur.execute("""
-    #     CREATE TABLE IF NOT EXISTS news_articles (
-    #         id SERIAL PRIMARY KEY,
-    #         url VARCHAR(1000),
-    #         text TEXT,
-    #         word_count INTEGER,
-    #         sentence_count INTEGER,
-    #         pos_tag_count INTEGER
-    #     )
-    # """)
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS news_articles (
+            id SERIAL PRIMARY KEY,
+            url VARCHAR(1000),
+            text TEXT,
+            word_count INTEGER,
+            sentence_count INTEGER,
+            pos_tag_count INTEGER
+        )
+    """)
 
     # Insert data into the database
-    # cur.execute("""
-    #     INSERT INTO news_articles (url, text, word_count, sentence_count, pos_tag_count)
-    #     VALUES (%s, %s, %s, %s, %s)
-    # """, (url, text, words_count, sent_count, pos_tag_count))
+    cur.execute("""
+        INSERT INTO news_articles (url, text, word_count, sentence_count, pos_tag_count)
+        VALUES (%s, %s, %s, %s, %s)
+    """, (url, text, words_count, sent_count, pos_tag_count))
 
-    # conn.commit()  # Commit changes
-    # conn.close()  # Close database connection
+    conn.commit()  # Commit changes
+    conn.close()  # Close database connection
 
     # Render the content.html template with the extracted data
     return render_template('content.html', heading=heading, sub_heading=sub_heading, text=text,
