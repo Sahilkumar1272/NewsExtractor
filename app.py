@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup  # Import BeautifulSoup for web scraping
 import requests  # Import requests library for HTTP requests
 import re  # Import re for regular expressions
 import nltk  # Import nltk for natural language processing
+nltk.download('all')
 from nltk.tokenize import word_tokenize, sent_tokenize  # Import tokenizers from NLTK
 from nltk import pos_tag  # Import part-of-speech tagger from NLTK
 import json  # Import json module for handling JSON data
