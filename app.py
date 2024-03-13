@@ -5,7 +5,10 @@ from bs4 import BeautifulSoup  # Import BeautifulSoup for web scraping
 import requests  # Import requests library for HTTP requests
 import re  # Import re for regular expressions
 import nltk  # Import nltk for natural language processing
-nltk.download('all')
+nltk.download('universal_tagset')
+nltk.download('punkt')
+nltk.download('udhr2')
+nltk.download('averaged_perceptron_tagger')
 from nltk.tokenize import word_tokenize, sent_tokenize  # Import tokenizers from NLTK
 from nltk import pos_tag  # Import part-of-speech tagger from NLTK
 import json  # Import json module for handling JSON data
