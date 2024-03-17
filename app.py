@@ -79,9 +79,9 @@ def cleaned_text_from_url(url):
 
         # Extracting main content
         main_content = soup.find('div', id='pcl-full-content')
-        unwanted=main_content.find_all('blockquote')
-        for unw in unwanted:
-            unw.decompose()
+        # unwanted=main_content.find_all('blockquote')
+        # for unw in unwanted:
+        #     unw.decompose()
         p_tags = main_content.find_all('p')
 
         # Extracting text content from <p> tags and concatenating into a single string
