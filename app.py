@@ -199,7 +199,8 @@ def login():
 def admin_logout():
     session.clear()  # Clear the session
     flash('You have been logged out successfully!', 'success')  # Flash message for logout
-    return redirect(url_for('admin'))  # Redirect to the admin login page
+    # return redirect(url_for('admin'))  # Redirect to the admin login page
+    return redirect(url_for('index'))
 
 
 
