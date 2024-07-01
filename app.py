@@ -17,7 +17,7 @@ from textblob import TextBlob
 from authlib.integrations.flask_client import OAuth
 
 app = Flask(__name__)  # Create a Flask app instance
-app.secret_key = 'sahil1272'
+app.secret_key = 'sahil1'
 
 # to github
 oauth = OAuth(app)
