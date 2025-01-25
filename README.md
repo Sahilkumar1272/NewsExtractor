@@ -31,4 +31,9 @@ This is a web-based application that allows users to extract and analyze content
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Sahilkumar1272/Project-1.git
+   git clone https://github.com/Sahilkumar1272/NewsExtractor.git
+
+2.Install dependencies:
+```bash
+pip install -r requirements.txt
+
