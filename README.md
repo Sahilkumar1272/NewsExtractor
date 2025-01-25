@@ -33,7 +33,7 @@ This is a web-based application that allows users to extract and analyze content
    ```bash
    git clone https://github.com/Sahilkumar1272/NewsExtractor.git
 
-2.Install dependencies:
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 
